@@ -12,8 +12,8 @@ public abstract class Artifact implements GetAsKML {
 	
 	@Override
 	public String getAsKML() {
-		// TODO Auto-generated method stub
-		return null;
+		String coordsXml = this.coords.getAsKML();
+		String artifactXml = this
 	}
 
 }

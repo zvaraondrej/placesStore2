@@ -1,5 +1,8 @@
 package es.uji.geotech.javap.placesStore;
 
+import placesStore.Artifact;
+import placesStore.GetAsKML;
+
 public class Placemark implements GetAsKML {
 	
 	private String name;
@@ -9,31 +12,34 @@ public class Placemark implements GetAsKML {
 	public Placemark(){
 		this.name = "Not provided";
 		this.desc = "Not provided";
-		this.artifact = null;
+		this.artifact = new Artifact();
 	}
 	
 	public Placemark(String name, String desc){
 		this.name = name;
 		this.desc = desc;
-		//this.artifact = new Artifact();
+		this.artifact = new Artifact();
 	}
 	
 	
 	
-	public void getName(){
-		
+	public String getName(){
+		return this.name;
 	}
 	
-	public void getDesc(){
-		
+	public String getDesc(){
+		return this.desc;
 	}
 	
 	
 	
-	@Override
 	public String getAsKML() {
-		// TODO Auto-generated method stub
-		return null;
+		String xmlStr = "\t<Placemark>";
+		xmlStr += "\t\t<name>" + this.getName() + "</name>";
+		xmlStr += "\t\t<description>" + this.getDesc() + "</description>";
+		//xmlStr +=  ...
+		xmlStr += "\t</Placemark>";
+		return xmlStr;
 	}
 
 }
