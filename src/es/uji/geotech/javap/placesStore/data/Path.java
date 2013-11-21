@@ -1,4 +1,6 @@
-package placesStore;
+package es.uji.geotech.javap.placesStore.data;
+
+import es.uji.geotech.javap.placesStore.GetAsKML;
 
 public abstract class Path implements GetAsKML {
 

@@ -1,4 +1,6 @@
-package placesStore;
+package es.uji.geotech.javap.placesStore.data;
+
+import es.uji.geotech.javap.placesStore.GetAsKML;
 
 public class Placemark implements GetAsKML {
 	
@@ -6,7 +8,7 @@ public class Placemark implements GetAsKML {
 	private String desc;
 	private Artifact artifact;
 
-	public Placesmark(){
+	public Placemark(){
 		this.name = "Not provided";
 		this.desc = "Not provided";
 		this.artifact = null;
@@ -15,7 +17,7 @@ public class Placemark implements GetAsKML {
 	public Placemark(String name, String desc){
 		this.name = name;
 		this.desc = desc;
-		this.artifact = new Artifact();
+		//this.artifact = new Artifact();
 	}
 	
 	
@@ -30,7 +32,6 @@ public class Placemark implements GetAsKML {
 	
 	
 	
-	private void 
 	@Override
 	public String getAsKML() {
 		// TODO Auto-generated method stub
