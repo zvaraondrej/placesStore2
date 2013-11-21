@@ -9,20 +9,19 @@ public class Placemark implements GetAsKML {
 	
 	private String name;
 	private String desc;
-	private Artifact artifact;
+	//private Artifact artifact;
 
 	public Placemark(){
 		this.name = "Not provided";
 		this.desc = "Not provided";
-		this.artifact = new Artifact();
+		//this.artifact = new Artifact();
 	}
 	
 	public Placemark(String name, String desc){
 		this.name = name;
 		this.desc = desc;
-		this.artifact = new Artifact();
+		//this.artifact = new Artifact();
 	}
-	
 	
 	
 	public String getName(){

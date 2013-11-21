@@ -1,9 +1,7 @@
 package es.uji.geotech.javap.placesStore.data;
 
 import es.uji.geotech.javap.placesStore.GetAsKML;
-
-import placesStore.GetAsKML;
-import placesStore.Placemark;
+import es.uji.geotech.javap.placesStore.data.Placemark;
 
 public class Document implements GetAsKML {
 	
