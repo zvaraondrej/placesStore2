@@ -5,7 +5,7 @@ public class Placemark implements GetAsKML {
 	
 	private String name;
 	private String desc;
-	//private Artifact artifact;
+	private Artifact artifact;
 
 	public Placemark(){
 		this.name = "Not provided";
@@ -13,11 +13,12 @@ public class Placemark implements GetAsKML {
 		//this.artifact = new Artifact();
 	}
 	
-	public Placemark(String name, String desc){
+	public Placemark(Artifact a, String name, String desc){
 		this.name = name;
 		this.desc = desc;
-		//this.artifact = new Artifact();
+		this.artifact = a;
 	}
+	
 	
 	
 	public String getName(){
@@ -26,6 +27,10 @@ public class Placemark implements GetAsKML {
 	
 	public String getDesc(){
 		return this.desc;
+	}
+	
+	public void print(){
+		
 	}
 	
 	
