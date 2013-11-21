@@ -6,10 +6,10 @@ public class Placemark implements GetAsKML {
 	private String desc;
 	private Artifact artifact;
 
-	public Placesmark(){
+	public Placemark(){
 		this.name = "Not provided";
 		this.desc = "Not provided";
-		this.artifact = null;
+		this.artifact = new Artifact();
 	}
 	
 	public Placemark(String name, String desc){
@@ -18,23 +18,21 @@ public class Placemark implements GetAsKML {
 		this.artifact = new Artifact();
 	}
 	
-	
-	
 	public void getName(){
-		
+		return this.name;
 	}
 	
 	public void getDesc(){
-		
+		return this.desc;
 	}
 	
-	
-	
-	private void 
-	@Override
 	public String getAsKML() {
-		// TODO Auto-generated method stub
-		return null;
+		String xmlStr = "\t<Placemark>";
+		xmlStr += "\t\t<name>" + this.getName() + "</name>";
+		xmlStr += "\t\t<description>" + this.getDesc() + "</description>";
+		//xmlStr +=  ...
+		xmlStr += "\t</Placemark>";
+		return xmlStr;
 	}
 
 }
