@@ -1,10 +1,5 @@
 package es.uji.geotech.javap.placesStore.data;
 
-import es.uji.geotech.javap.placesStore.GetAsKML;
-
-import placesStore.Artifact;
-import placesStore.GetAsKML;
-
 public class Placemark implements GetAsKML {
 	
 	private String name;
