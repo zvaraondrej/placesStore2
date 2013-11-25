@@ -29,6 +29,10 @@ public class Placemark implements GetAsKML {
 		return this.desc;
 	}
 	
+	public Artifact getArtifact(){
+		return this.artifact;
+	}
+	
 	public void print(){
 		
 	}

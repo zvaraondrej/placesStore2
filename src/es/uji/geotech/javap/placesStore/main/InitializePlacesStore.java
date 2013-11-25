@@ -36,57 +36,83 @@ public class InitializePlacesStore {
 			Scanner scanner = new Scanner(System.in); // System.in is the keyboard
 			System.out.print("Please, select an option: ");
 			int option = scanner.nextInt();
+			scanner.close();
 			return option;
 		}
 
-		public String askForPlaceName() {
-			Scanner scanner = new Scanner(System.in); // System.in is the keyboard
-			System.out.print("Name: ");
-			String name = scanner.nextLine();
-			return name;
-		}
+		/********/
 		
+		public void showPointMenu(){
+			int dim = this.chooseDimensions();
+			String name = this.askForPlaceNameOrDesc("Name");
+			String desc = this.askForPlaceNameOrDesc("Desc");
+			if (dim == 2){
+				double x = this.askForPlaceCoord("X");
+				double y = this.askForPlaceCoord("Y");
+				doc.addPoint(name, desc, x, y);
+			}
+			else if (dim == 3){
+				double x = this.askForPlaceCoord("X");
+				double y = this.askForPlaceCoord("Y");
+				double z = this.askForPlaceCoord("Z");
+				doc.addPoint(name, desc, x, y, z);
+			}
+			else{
+				System.out.println("Error as hell!");
+			}
+		}
 		
 		private int chooseDimensions(){
 			Scanner scanner = new Scanner(System.in); // System.in is the keyboard
 			System.out.print("Choose number of dimensions (2 or 3): ");
-			int dim = scanner.nextDouble();
+			int dim = scanner.nextInt();
+			scanner.close();
 			return dim;
 		}
 		
-		private double askForPlaceX() {
+		public String askForPlaceNameOrDesc(String str) {
 			Scanner scanner = new Scanner(System.in); // System.in is the keyboard
-			System.out.print("X coordinate: ");
-			double coord = scanner.nextDouble();
-			return coord;
-		}
-					
-		private double askForPlaceY() {
-			Scanner scanner = new Scanner(System.in); // System.in is the keyboard
-			System.out.print("Y coordinate: ");
-			double coord = scanner.nextDouble();
-			return coord;
+			System.out.print(str + ": ");
+			String txt = scanner.nextLine();
+			scanner.close();
+			return txt;
 		}
 		
-		private double askForPlaceZ() {
+		private double askForPlaceCoord(String c) {
 			Scanner scanner = new Scanner(System.in); // System.in is the keyboard
-			System.out.print("Z coordinate: ");
+			System.out.print(c + "coordinate: ");
 			double coord = scanner.nextDouble();
+			scanner.close();
 			return coord;
+		}
+	
+		public void showLineMenu(String type){
+			String name = this.askForPlaceNameOrDesc("Name");
+			String desc = this.askForPlaceNameOrDesc("Desc");
+			Coordinates[] coords = this.askForCoords();
+			
+			// methods to get extrude, tess, altMode ...
+			
+			if(type == "LineString"){
+				doc.addLineString(name, desc, coords, extrude, tessalate, altitudeMode);
+			}
+			else if(type == "LinearRing"){
+				doc.addLinearRing(name, desc, coords, extrude, tessalate, altitudeMode);
+			}
 		}
 		
 		private Coordinates[] askForCoords(){
-			private int i = 0;
-			private Coordinates coords[] = new Coordinates[100]; 
+			int i = 0;
+			Coordinates coords[] = new Coordinates[100]; 
 			System.out.println("Enter coordinates: ");
 			do{
 				System.out.println("1.- Add coords.");
 				System.out.println("2.- Exit.");
 				int userOption = askForOption();
 				if(userOption == 1){
-					double x = this.askForPlaceX();
-					double y = this.askForPlaceY();
-					double z = this.askForPlaceZ();
+					double x = this.askForPlaceCoord("X");
+					double y = this.askForPlaceCoord("Y");
+					double z = this.askForPlaceCoord("Z");
 					coords[i] = new CoordinatesWithAltitude(x, y, z);
 					i++;
 				} else if (userOption == 2) {
@@ -96,37 +122,7 @@ public class InitializePlacesStore {
 			return coords;
 		}
 		
-		public void showPointMenu(){
-			int dim = this.chooseDimensions();
-			String name = this.askForPlaceName();
-			if (dim == 2){
-				double x = this.askForPlaceX();
-				double y = this.askForPlaceY();
-				doc.addPoint(name, desc, x, y);
-			}
-			else if (dim == 3){
-				double x = this.askForPlaceX();
-				double y = this.askForPlaceY();
-				double z = this.askForPlaceZ();
-				doc.addPoint(name, desc, x, y, z);
-			}
-			else{
-				System.out.println("Error as hell!");
-			}
-		}
 
-
-		public void showLineStringMenu(){
-			String name = this.askForPlaceName();
-			Coordinates[] coords = this.askForCoords();
-			doc.addLineString(name, desc, coords, extrude, tessalate, altitudeMode);
-		}
-		
-		public void showLinearRingMenu(){
-			String name = this.askForPlaceName();
-			Coordinates[] coords = this.askForCoords();
-			doc.addLinearRing(name, desc, coords, extrude, tessalate, altitudeMode);
-		}
 
 		public void performTask(int theOption) {
 			switch (theOption) {
@@ -134,16 +130,16 @@ public class InitializePlacesStore {
 					this.showPointMenu();
 					break;
 				case 2:
-					this.showPoinshowLineStringMenutMenu();
+					this.showLineWhateverMenu();
 					break;
 				case 3:
-					this.showLinearRingMenu();
+					this.showLineWhateverMenu();
 					break;
 				case 4:
 					doc.getAsKML();
 					break;
 				case 5:
-					String nameofSearched = askForPlaceName();
+					String nameofSearched = askForPlaceNameOrDesc("Name");
 					doc.searchPlacemark(nameofSearched);
 					break;
 				case 0:
