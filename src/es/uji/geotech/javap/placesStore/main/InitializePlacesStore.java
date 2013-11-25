@@ -1,6 +1,7 @@
 package es.uji.geotech.javap.placesStore.main;
 
 import java.util.Scanner;
+
 import es.uji.geotech.javap.placesStore.data.*;
 
 
@@ -92,6 +93,12 @@ public class InitializePlacesStore {
 			Coordinates[] coords = this.askForCoords();
 			
 			// methods to get extrude, tess, altMode ...
+			boolean tessalate = getBoolParam("tessalate");
+			boolean extrude = getBoolParam("extrude");
+			AltitudeMode altitudeMode = getAltitudeMode();
+			
+			
+			
 			
 			if(type == "LineString"){
 				doc.addLineString(name, desc, coords, extrude, tessalate, altitudeMode);
@@ -105,10 +112,11 @@ public class InitializePlacesStore {
 			int i = 0;
 			Coordinates coords[] = new Coordinates[100]; 
 			System.out.println("Enter coordinates: ");
+			int userOption;
 			do{
 				System.out.println("1.- Add coords.");
 				System.out.println("2.- Exit.");
-				int userOption = askForOption();
+				userOption = askForOption();
 				if(userOption == 1){
 					double x = this.askForPlaceCoord("X");
 					double y = this.askForPlaceCoord("Y");
@@ -122,6 +130,46 @@ public class InitializePlacesStore {
 			return coords;
 		}
 		
+		
+		
+		private boolean getBoolParam(String type){
+			Scanner scanner = new Scanner(System.in); // System.in is the keyboard
+			System.out.print("Choose parameter " + type + " value: ");
+			int intChoice;
+			do{
+				System.out.print("Type 1 for true");
+				System.out.print("Type 0 for false");
+				intChoice = scanner.nextInt();
+			} while(intChoice == 1 || intChoice == 0);
+			
+			boolean boolChoice;
+			if (intChoice == 1){
+				boolChoice = true;
+			}
+			else{
+				boolChoice = false;
+			}
+			scanner.close();
+			
+			return boolChoice;
+		}
+		
+		private AltitudeMode getAltitudeMode(){
+			Scanner scanner = new Scanner(System.in); // System.in is the keyboard
+			System.out.print("Choose Altitude Mode: ");
+			int test = 0;
+			String str;
+			AltitudeMode altStr = null;
+			do{
+				str = scanner.nextLine();
+				if(AltitudeMode.stringToEnum(str) != null){
+					altStr = AltitudeMode.stringToEnum(str);
+				}
+			}
+			while(altStr != null);
+			return altStr;
+		}
+		
 
 
 		public void performTask(int theOption) {
@@ -130,10 +178,10 @@ public class InitializePlacesStore {
 					this.showPointMenu();
 					break;
 				case 2:
-					this.showLineWhateverMenu();
+					this.showLineMenu("LineString");
 					break;
 				case 3:
-					this.showLineWhateverMenu();
+					this.showLineMenu("LinearRing");
 					break;
 				case 4:
 					doc.getAsKML();
